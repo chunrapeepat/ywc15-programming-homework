@@ -8,6 +8,7 @@ import {insertInterviewAction} from '../core/helper'
 import App from '../components/App'
 import Loader from '../components/Loader'
 import Header from '../containers/Header'
+import Search from '../containers/Search'
 import Footer from '../components/Footer'
 
 class Index extends Component {
@@ -29,6 +30,7 @@ class Index extends Component {
     return (
       <Loader isLoading={this.state.loading}>
         <Header />
+        <Search />
         <Footer />
       </Loader>
     )
