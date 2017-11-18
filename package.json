@@ -1,0 +1,9 @@
+{
+  "name": "ywc15-programming-homework",
+  "version": "1.0.0.",
+  "description": "web programming homework for ywc15",
+  "main": "index.js",
+  "repository": "https://github.com/chunza2542/ywc15-programming-homework.git",
+  "author": "chunza2542 <chunza2542@hotmail.com>",
+  "license": "MIT"
+}
