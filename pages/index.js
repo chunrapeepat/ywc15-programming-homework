@@ -1,7 +1,10 @@
 import React, {Component} from 'react'
 import fetch from 'isomorphic-fetch'
+import {connect} from 'react-redux'
 
 import {apiEndpoint} from '../config'
+import {insertInterviewAction} from '../core/helper'
+
 import App from '../components/App'
 import Loader from '../components/Loader'
 import Header from '../containers/Header'
@@ -19,6 +22,7 @@ class Index extends Component {
     setTimeout(() => {
       this.setState({ loading: false })
     }, 2000)
+    this.props.pushInterviewToStore(interview)
   }
   render() {
     return (
@@ -29,4 +33,10 @@ class Index extends Component {
   }
 }
 
-export default App(Index)
+function mapDispatchToProps(dispatch) {
+  return {
+    pushInterviewToStore: data => dispatch(insertInterviewAction(data))
+  }
+}
+
+export default App(connect(null, mapDispatchToProps)(Index))

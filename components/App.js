@@ -24,7 +24,12 @@ const enhance = lifecycle({
 })
 
 const store = createStore((state = [], action) => {
-  return state
+  switch (action.type) {
+    case 'INSERT_INTERVIEW_DATA':
+      return [...state, ...action.payload]
+    default:
+      return state
+  }
 })
 
 const App = Component =>
