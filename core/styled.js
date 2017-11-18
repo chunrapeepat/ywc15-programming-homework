@@ -4,7 +4,59 @@ export const Padding = styled.div`
   padding: 50px;
 `
 
-export const FlatButton = styled.div`
+export const InputLabel = styled.span`
+  font-family: supermarket;
+  color: white;
+  font-size: 22px;
+  display: inline-block;
+  margin-bottom: 10px;
+`
+
+export const Input = styled.input`
+  outline: none;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #A8F7F0;
+  font-size: 18px;
+  background: rgba(168,247,240,0.1);
+  color: white;
+  display: block;
+  width: 100%;
+  margin-bottom: 30px;
+
+  &:focus {
+    background: rgba(168,247,240,0.2);
+  }
+
+  &::-webkit-input-placeholder {
+    color: rgba(168,247,240,0.5);
+  }
+  &::-moz-placeholder {
+    color: rgba(168,247,240,0.5);
+  }
+  &:-ms-input-placeholder {
+    color: rgba(168,247,240,0.5);
+  }
+  &:-moz-placeholder {
+    color: rgba(168,247,240,0.5);
+  }
+`
+
+export const Select = styled.select`
+  height: 40px;
+  background: transparent;
+  outline: none;
+  border: 1px solid #A8F7F0;
+  font-size: 18px;
+  background: rgba(168,247,240,0.1);
+  color: white;
+  display: block;
+  width: 100%;
+  margin-bottom: 30px;
+`
+
+export const FlatButton = styled.button`
+  border: 0;
   outline: none;
   color: white;
   font-family: supermarket;
