@@ -1,5 +1,9 @@
 import React, {Component} from 'react'
 import styled from 'styled-components'
+import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
+
+import {checkCandidate} from '../core/helper'
 
 const Container = styled.div`
   width: 100vw;
@@ -45,32 +49,49 @@ const Divider = styled.div`
   background: #A8F7F0;
 `
 
-export default class extends Component {
+class RandomBar extends Component {
   constructor() {
     super()
     this.state = {
-      left: '0px'
+      left: '0px',
+      win: false,
     }
   }
+
   componentDidMount() {
     if (window !== undefined) {
       const diff = (window.innerWidth / 2) - 850
       this.setState({
-        left: diff
+        left: diff,
+        win: false,
       })
     }
   }
+
+  componentWillReceiveProps(props) {
+    const {run, name, major, candidate} = props
+    if (run) {
+      this.run()
+      this.setState({win: checkCandidate(name, major, candidate)})
+    }
+  }
+
   randomCard() {
     let cards = []
     for(let i = 1; i <= 140; i++) {
       let random = true
-      if (Math.random() * 10 > 6) {
-        random = false
+      if (i === 122) {
+        if (!this.state.win) random = false
+      } else {
+        if (Math.random() * 10 > 6) {
+          random = false
+        }
       }
       cards.push(random)
     }
     return cards
   }
+
   reset() {
     if (window !== undefined) {
       const diff = (window.innerWidth / 2) - 850
@@ -79,6 +100,7 @@ export default class extends Component {
       })
     }
   }
+
   run() {
     const offset = -1 * Math.random() * 100
     const diff = (window.innerWidth / 2) - 850 - 30120 + offset
@@ -92,6 +114,7 @@ export default class extends Component {
       }
     }, 11 * 1000)
   }
+
   render() {
     return (
       <div>
@@ -103,9 +126,17 @@ export default class extends Component {
             })}
           </CardContainer>
         </Container>
-        <button onClick={() => this.run()}>Random</button>
-        <button onClick={() => this.reset()}>Reset</button>
       </div>
     )
   }
 }
+
+// Propstype: run, name, major
+
+function mapStateToProps(state) {
+  return {
+    candidate: state
+  }
+}
+
+export default connect(mapStateToProps, null)(RandomBar)
