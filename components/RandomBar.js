@@ -77,11 +77,14 @@ class RandomBar extends Component {
   }
 
   randomCard() {
+    console.log('shit', this.state.win)
     let cards = []
     for(let i = 1; i <= 140; i++) {
       let random = true
-      if (i === 122) {
-        if (!this.state.win) random = false
+      if (i === 123) {
+        if (this.state.win) {
+          random = false
+        }
       } else {
         if (Math.random() * 10 > 6) {
           random = false
@@ -109,7 +112,6 @@ class RandomBar extends Component {
     })
     setTimeout(() => {
       if (window !== undefined) {
-        // Card number 122
         // Modal here
       }
     }, 11 * 1000)

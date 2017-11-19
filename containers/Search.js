@@ -23,7 +23,7 @@ class SearchForm extends Component {
     this.setState({ name: e.target.value })
   }
   handleMajorChange(e) {
-    this.setState({ major: e.target.value })
+    this.setState({ major: parseInt(e.target.value) })
   }
   handleSubmit(e) {
     e.preventDefault()
