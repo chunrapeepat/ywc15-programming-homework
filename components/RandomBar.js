@@ -3,7 +3,8 @@ import styled from 'styled-components'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 
-import {checkCandidate} from '../core/helper'
+import Modal from './Modal'
+import {checkCandidate, majorToString, findInterviewCode} from '../core/helper'
 
 const Container = styled.div`
   width: 100vw;
@@ -55,6 +56,8 @@ class RandomBar extends Component {
       left: '0px',
       transition: '10s',
       win: false,
+      modal: false,
+      info: {name:'', major:1, code: ''},
     }
   }
 
@@ -70,11 +73,15 @@ class RandomBar extends Component {
 
   componentWillReceiveProps(props) {
     this.reset()
+    this.setState({ modal: false })
     setTimeout(() => {
       const {run, name, major, candidate} = props
       if (run) {
         this.run()
-        this.setState({win: checkCandidate(name, major, candidate)})
+        this.setState({
+          win: checkCandidate(name, major, candidate),
+          info: {name, major: majorToString(major), code: findInterviewCode(name, candidate)},
+        })
       }
     }, 5)
   }
@@ -116,7 +123,7 @@ class RandomBar extends Component {
     })
     setTimeout(() => {
       if (window !== undefined) {
-        alert(this.state.win)
+        this.setState({ modal: true })
       }
     }, 11 * 1000)
   }
@@ -124,6 +131,7 @@ class RandomBar extends Component {
   render() {
     return (
       <div>
+        <Modal info={this.state.info} win={this.state.win} show={this.state.modal}/>
         <Divider />
         <Container>
           <CardContainer style={{marginLeft: this.state.left, transition: this.state.transition}}>

@@ -17,6 +17,7 @@ class SearchForm extends Component {
     this.state = {
       name: '',
       major: 1,
+      disabled: false,
     }
   }
   handleNameChange(e) {
@@ -30,7 +31,10 @@ class SearchForm extends Component {
     if (this.state.name === '') {
       alert('Warning: name field must be required!')
     } else {
-      this.setState({ name: '', major: 1 })
+      this.setState({ name: '', major: 1, disabled: true })
+      setTimeout(() => {
+        this.setState({ disabled: false })
+      }, 11 * 1000)
       this.props.receiveFormInput(this.state.name, this.state.major)
     }
   }
@@ -39,15 +43,17 @@ class SearchForm extends Component {
       <FormContainer onSubmit={this.handleSubmit.bind(this)}>
         <Padding>
           <InputLabel>ชื่อ นามสกุล</InputLabel>
-          <Input value={this.state.name} onChange={this.handleNameChange.bind(this)} placeholder="ไม่ต้องใส่คำนำหน้า เช่น ประยุทธ์ จันโอชา"/>
+          <Input disabled={this.state.disabled} value={this.state.name} onChange={this.handleNameChange.bind(this)} placeholder="ไม่ต้องใส่คำนำหน้า เช่น ประยุทธ์ จันโอชา"/>
           <InputLabel>เลือกสาขาของตัวเอง</InputLabel>
-          <Select value={this.state.major} onChange={this.handleMajorChange.bind(this)}>
+          <Select disabled={this.state.disabled} value={this.state.major} onChange={this.handleMajorChange.bind(this)}>
             <option value="1">สาขา Web Content</option>
             <option value="2">สาขา Web Design</option>
             <option value="3">สาขา Web Marketing</option>
             <option value="4">สาขา Web Programming</option>
           </Select>
-          <FlatButton type="submit">ค้นหาจากรายชื่อ</FlatButton>
+          <FlatButton disabled={this.state.disabled} type="submit">
+            {(this.state.disabled) ? 'กำลังค้นหา...' : 'ค้นหาจากรายชื่อ'}
+          </FlatButton>
         </Padding>
       </FormContainer>
     )
