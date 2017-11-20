@@ -30,7 +30,7 @@ class SearchForm extends Component {
     if (this.state.name === '') {
       alert('Warning: name field must be required!')
     } else {
-      this.setState({ name: '' })
+      this.setState({ name: '', major: 1 })
       this.props.receiveFormInput(this.state.name, this.state.major)
     }
   }

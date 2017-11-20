@@ -17,7 +17,6 @@ const Container = styled.div`
 const CardContainer = styled.div`
   width: 40000px;
   overflow-y: scroll;
-  transition: 10s;
 `
 
 const Card = styled.div`
@@ -54,6 +53,7 @@ class RandomBar extends Component {
     super()
     this.state = {
       left: '0px',
+      transition: '10s',
       win: false,
     }
   }
@@ -69,15 +69,17 @@ class RandomBar extends Component {
   }
 
   componentWillReceiveProps(props) {
-    const {run, name, major, candidate} = props
-    if (run) {
-      this.run()
-      this.setState({win: checkCandidate(name, major, candidate)})
-    }
+    this.reset()
+    setTimeout(() => {
+      const {run, name, major, candidate} = props
+      if (run) {
+        this.run()
+        this.setState({win: checkCandidate(name, major, candidate)})
+      }
+    }, 5)
   }
 
   randomCard() {
-    console.log('shit', this.state.win)
     let cards = []
     for(let i = 1; i <= 140; i++) {
       let random = true
@@ -99,7 +101,8 @@ class RandomBar extends Component {
     if (window !== undefined) {
       const diff = (window.innerWidth / 2) - 850
       this.setState({
-        left: diff
+        left: diff,
+        transition: '0s',
       })
     }
   }
@@ -108,11 +111,12 @@ class RandomBar extends Component {
     const offset = -1 * Math.random() * 100
     const diff = (window.innerWidth / 2) - 850 - 30120 + offset
     this.setState({
-      left: diff + 'px'
+      left: diff + 'px',
+      transition: '10s',
     })
     setTimeout(() => {
       if (window !== undefined) {
-        // Modal here
+        alert(this.state.win)
       }
     }, 11 * 1000)
   }
@@ -122,7 +126,7 @@ class RandomBar extends Component {
       <div>
         <Divider />
         <Container>
-          <CardContainer style={{marginLeft: this.state.left}}>
+          <CardContainer style={{marginLeft: this.state.left, transition: this.state.transition}}>
             {this.randomCard().map((x, i) => {
               return <Card red={x} key={`card` + i}></Card>
             })}
