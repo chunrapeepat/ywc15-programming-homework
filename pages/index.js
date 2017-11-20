@@ -23,7 +23,7 @@ class Index extends Component {
     const interview = await response.json()
     setTimeout(() => {
       this.setState({ loading: false })
-    }, 2000)
+    }, 1000)
     this.props.pushInterviewToStore(interview)
   }
   render() {

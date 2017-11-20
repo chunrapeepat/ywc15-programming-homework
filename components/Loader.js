@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import styled, {keyframes} from 'styled-components'
 
@@ -7,6 +7,7 @@ const Container = styled.div`
   width: 100vw;
   height: 100vh;
   z-index: 999999;
+  transition: 0.5s;
   background: rgba(0, 0, 0, 0.85);
 `
 
@@ -58,17 +59,36 @@ const LoadingAnimation = styled.div`
   }
 `
 
-const Loader = props => (
-  <div>
-    <Container style={{'display': (props.isLoading) ? 'auto' : 'none'}}>
-      <LoadingAnimation>
-        <div/>
-        <div/>
-      </LoadingAnimation>
-    </Container>
-    {props.children}
-  </div>
-)
+class Loader extends Component {
+  constructor() {
+    super()
+    this.state = {
+      opacity: '1',
+      display: 'auto',
+    }
+  }
+  componentWillReceiveProps(props) {
+    if (!props.isLoading) {
+      this.setState({ opacity: 0 })
+      setTimeout(() => {
+        this.setState({ display: 'none' })
+      }, 500)
+    }
+  }
+  render() {
+    return (
+      <div>
+        <Container style={{opacity: this.state.opacity, display: this.state.display}}>
+          <LoadingAnimation>
+            <div/>
+            <div/>
+          </LoadingAnimation>
+        </Container>
+        {this.props.children}
+      </div>
+    )
+  }
+}
 
 Loader.propTypes = {
   isLoading: PropTypes.bool.isRequired,

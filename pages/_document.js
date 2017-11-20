@@ -10,7 +10,7 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
-          <title>Chun Rapeepat | Personal Site</title>
+          <title>YWC15 Programming Homework | Interview Candidates</title>
           <meta name="theme-color" content="#000" />
           <meta name="viewport" content="width=device-width" />
           {styleTags}
