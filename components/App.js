@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
 import {createStore} from 'redux'
-import {Provider} from 'react-redux'
 import {lifecycle} from 'recompose'
+import {Provider} from 'react-redux'
 import {injectGlobal} from 'styled-components'
 
+// Inject global css styles
 const enhance = lifecycle({
   componentWillMount() {
     injectGlobal`
@@ -23,15 +24,21 @@ const enhance = lifecycle({
   }
 })
 
+// Redux store for keeping Candidates data
 const store = createStore((state = [], action) => {
   switch (action.type) {
     case 'INSERT_INTERVIEW_DATA':
-      return [...state, ...action.payload]
+      if (state.length > 0) {
+        return state
+      } else {
+        return [...state, ...action.payload]
+      }
     default:
       return state
   }
 })
 
+// Warp Provider to app component
 const App = Component =>
   enhance(props => (
     <Provider store={store}>

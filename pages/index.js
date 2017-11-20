@@ -12,12 +12,15 @@ import Search from '../containers/Search'
 import Footer from '../components/Footer'
 
 class Index extends Component {
+
   constructor() {
     super()
     this.state = {
       loading: true
     }
   }
+
+  // Fetch data to apiEndpoint
   async componentDidMount() {
     const response = await fetch(apiEndpoint)
     const interview = await response.json()
@@ -26,6 +29,8 @@ class Index extends Component {
     }, 1000)
     this.props.pushInterviewToStore(interview)
   }
+
+
   render() {
     return (
       <Loader isLoading={this.state.loading}>
@@ -37,6 +42,7 @@ class Index extends Component {
   }
 }
 
+// Map dispatch from redux to props
 function mapDispatchToProps(dispatch) {
   return {
     pushInterviewToStore: data => dispatch(insertInterviewAction(data))

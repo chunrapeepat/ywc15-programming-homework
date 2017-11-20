@@ -25,20 +25,24 @@ export const Input = styled.input`
   margin-bottom: 30px;
 
   &:focus {
-    background: rgba(168,247,240,0.2);
+    background: rgba(168, 247, 240, 0.2);
+  }
+
+  &:disabled {
+    background: rgba(168, 247, 240, 0.2);
   }
 
   &::-webkit-input-placeholder {
-    color: rgba(168,247,240,0.5);
+    color: rgba(168, 247, 240, 0.5);
   }
   &::-moz-placeholder {
-    color: rgba(168,247,240,0.5);
+    color: rgba(168, 247, 240, 0.5);
   }
   &:-ms-input-placeholder {
-    color: rgba(168,247,240,0.5);
+    color: rgba(168, 247, 240, 0.5);
   }
   &:-moz-placeholder {
-    color: rgba(168,247,240,0.5);
+    color: rgba(168, 247, 240, 0.5);
   }
 `
 
@@ -48,11 +52,15 @@ export const Select = styled.select`
   outline: none;
   border: 1px solid #A8F7F0;
   font-size: 18px;
-  background: rgba(168,247,240,0.1);
+  background: rgba(168, 247, 240, 0.1);
   color: white;
   display: block;
   width: 100%;
   margin-bottom: 30px;
+
+  &:disabled {
+    background: rgba(168, 247, 240, 0.2);
+  }
 `
 
 export const FlatButton = styled.button`
@@ -71,6 +79,10 @@ export const FlatButton = styled.button`
   }
 
   &:active {
+    background: rgba(144, 249, 240, 0.4);
+  }
+
+  &:disabled {
     background: rgba(144, 249, 240, 0.4);
   }
 `

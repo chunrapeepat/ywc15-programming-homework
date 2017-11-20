@@ -1,12 +1,14 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
+// Backdrop shadow
 const Backdrop = styled.div`
+  top: 0;
   width: 100vw;
   height: 100vh;
   position: fixed;
   z-index: 999999;
-  top: 0;
   cursor: pointer;
 `
 
@@ -15,60 +17,69 @@ const Padding = styled.div`
   text-align: center;
 `
 
+// Modal container
 const Container = styled.div`
+  top: 50vh;
+  left: 50%;
   width: 600px;
   height: 450px;
   position: fixed;
   z-index: 99999999;
-  top: calc(50vh - 225px);
-  left: calc(50vw - 300px);
-  background: ${props => (props.win) ? '#EFFFED' : '#FFEDED'};
   border-radius: 5px;
+  transform: translate(-50%, -50%);
   transition-timing-function: ease-in-out;
+  background: ${props => (props.win) ? '#EFFFED' : '#FFEDED'};
 
   ${this} > div:nth-child(1) {
-    background: ${props => (props.win) ? '#048C00' : '#8C1100'};
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    text-align: center;
     width: 100%;
     height: 200px;
+    text-align: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background: ${props => (props.win) ? '#048C00' : '#8C1100'};
   }
 `
 
 const Content = styled.div`
+  display: block;
+
   ${this} > h1 {
-    font-family: supermarket;
     font-size: 40px;
+    font-family: supermarket;
   }
+
   ${this} > div {
     font-size: 18px;
-    font-family: sans-serif;
     line-height: 30px;
+    font-family: sans-serif;
   }
 `
+class Modal extends Component {
 
-export default class extends Component {
   constructor() {
     super()
     this.state = {
+      info: {},
       win: false,
-      transition: '0s',
-      background: 'rgba(0, 0, 0, 0)',
+      // Animation state
       top: '-100vh',
+      transition: '0s',
       modalMargin: '100vh',
-      info: {name: '', major: '', code: ''},
+      background: 'rgba(0, 0, 0, 0)',
     }
   }
+
   componentWillReceiveProps(props) {
+    // Update win & information
     this.setState({
       win: props.win,
       info: props.info,
     })
     if (props.show) {
+      // Play backdrop and modal animation
       this.setState({
-        transition: '0s',
         top: '0',
+        transition: '0s',
         modalMargin: '0',
         modalTransition: '0.5s',
       })
@@ -79,33 +90,52 @@ export default class extends Component {
         })
       }, 5)
     } else {
+      // Reset animation
       this.setState({
-        transition: '0.5s',
-        background: 'rgba(0, 0, 0, 0.0)',
         top: '-100vh',
-        modalTransition: '0s',
+        transition: '0.5s',
         modalMargin: '100vh',
+        modalTransition: '0s',
+        background: 'rgba(0, 0, 0, 0.0)',
       })
     }
   }
+
+  // Play backdrop and modal animation (hide)
   hideBackdrop() {
     this.setState({
       transition: '0.5s',
-      background: 'rgba(0, 0, 0, 0.0)',
-      modalTransition: '0.5s',
       modalMargin: '-100vh',
+      modalTransition: '0.5s',
+      background: 'rgba(0, 0, 0, 0.0)',
     })
     setTimeout(() => {
       this.setState({
-        top: '-100vh'
+        top: '-100vh',
       })
     }, 500)
   }
+
   render() {
-    const {modalMargin, modalTransition, transition, background, top} = this.state
+
+    const {
+      win,
+      modalMargin,
+      modalTransition,
+      transition,
+      background,
+      top,
+    } = this.state
+
     return (
       <div>
-        <Container win={this.state.win} style={{marginTop: modalMargin, transition: modalTransition}}>
+
+        <Container
+          win={win}
+          style={{
+            marginTop: modalMargin,
+            transition: modalTransition,
+          }}>
           <Padding>
             <img height="160px" src="/static/logo.png" alt="YWC15"/>
           </Padding>
@@ -128,8 +158,24 @@ export default class extends Component {
             }
           </Padding>
         </Container>
-        <Backdrop onClick={() => this.hideBackdrop()} style={{transition, top, background}}/>
+
+        <Backdrop
+          onClick={() => this.hideBackdrop()}
+          style={{transition, top, background}}
+        />
+
       </div>
     )
   }
 }
+
+Modal.propTypes = {
+  // True = candidate pass, False = candidate fail
+  win: PropTypes.bool.isRequired,
+  // True = modal open, False = modal close
+  show: PropTypes.bool.isRequired,
+  // Info { name, major, code (InterviewRef) }
+  info: PropTypes.object.isRequired,
+}
+
+export default Modal

@@ -11,7 +11,8 @@ const Container = styled.div`
   background: rgba(0, 0, 0, 0.85);
 `
 
-const LoadingAnimation1 = keyframes`
+// Outer animation
+const keyframeLoadingRotate = keyframes`
   from {
     transform: rotate(0deg);
   }
@@ -20,7 +21,8 @@ const LoadingAnimation1 = keyframes`
   }
 `
 
-const LoadingAnimation2 = keyframes`
+// Inner Animation
+const keyframeLoadingBlink = keyframes`
   from {
     transform: scale(0.50);
   }
@@ -37,13 +39,13 @@ const LoadingAnimation = styled.div`
   ${this} > div:nth-child(1) {
     width: 100px;
     height: 100px;
-    border: 10px dashed #A8F7F0;
     position: fixed;
     border-radius: 50%;
+    border: 10px dashed #A8F7F0;
     margin-top: calc(50vh - 50px);
     margin-left: calc(50vw - 50px);
-    animation: ${LoadingAnimation1} 5s linear infinite;
     animation-direction: alternate;
+    animation: ${keyframeLoadingRotate} 5s linear infinite;
   }
 
   ${this} > div:nth-child(2) {
@@ -54,12 +56,13 @@ const LoadingAnimation = styled.div`
     border-radius: 50%;
     margin-top: calc(50vh - 50px);
     margin-left: calc(50vw - 50px);
-    animation: ${LoadingAnimation2} 0.5s linear infinite;
     animation-direction: alternate;
+    animation: ${keyframeLoadingBlink} 0.5s linear infinite;
   }
 `
 
 class Loader extends Component {
+
   constructor() {
     super()
     this.state = {
@@ -67,18 +70,25 @@ class Loader extends Component {
       display: 'auto',
     }
   }
+
+  // If isLoading = false, do fadeOut animation
   componentWillReceiveProps(props) {
     if (!props.isLoading) {
       this.setState({ opacity: 0 })
+      // If animation done, display = none
       setTimeout(() => {
         this.setState({ display: 'none' })
       }, 500)
     }
   }
+
   render() {
     return (
       <div>
-        <Container style={{opacity: this.state.opacity, display: this.state.display}}>
+        <Container style={{
+          opacity: this.state.opacity,
+          display: this.state.display,
+        }}>
           <LoadingAnimation>
             <div/>
             <div/>
@@ -88,11 +98,14 @@ class Loader extends Component {
       </div>
     )
   }
+
 }
 
 Loader.propTypes = {
+  // True = loading, False = finish loading
   isLoading: PropTypes.bool.isRequired,
-  children: PropTypes.element.isRequired,
+  // Array of element
+  children: PropTypes.array.isRequired,
 }
 
 export default Loader
