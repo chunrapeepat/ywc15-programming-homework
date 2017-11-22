@@ -9,8 +9,8 @@ import App from '../components/App'
 import Loader from '../components/Loader'
 import Header from '../containers/Header'
 import Search from '../containers/Search'
-import Candidates from '../containers/Candidates'
 import Footer from '../components/Footer'
+import Candidates from '../containers/Candidates'
 
 class Index extends Component {
 
@@ -22,7 +22,7 @@ class Index extends Component {
     }
   }
 
-  // Fetch data to apiEndpoint
+  // Fetch data from apiEndpoint
   async componentDidMount() {
     const response = await fetch(apiEndpoint)
     const interview = await response.json()
@@ -39,7 +39,9 @@ class Index extends Component {
   render() {
     return (
       <Loader isLoading={this.state.loading}>
-        <Header searchPage={this.state.searchPage} onClickFunc={() => this.togglePage()}/>
+        <Header
+          searchPage={this.state.searchPage}
+          onClickFunc={() => this.togglePage()}/>
         { this.state.searchPage &&
           <Search />
         }

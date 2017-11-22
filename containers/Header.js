@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import styled from 'styled-components'
 import fetch from 'isomorphic-fetch'
-import Link from 'next/link'
+import PropTypes from 'prop-types'
 
 import {
   Padding,
@@ -38,29 +38,28 @@ const Heading = styled.div`
   }
 `
 
-class Header extends Component {
+const Header = props => (
+  <Padding>
+    <Container>
+      <Logo />
+      <Heading>
+        <h1>SEMI_FINAL ROUND</h1>
+        <span>ประกาศผู้มีสิทธิ์เข้าสัมภาษณ์</span>
+      </Heading>
+      <div>
+        <FlatButton onClick={() => props.onClickFunc()}>
+          {props.searchPage ? 'ดูรายชื่อทั้งหมด' : '< กลับไปหน้าแรก'}
+        </FlatButton>
+      </div>
+    </Container>
+  </Padding>
+)
 
-  render() {
-    return (
-      <Padding>
-        <Container>
-          <Logo />
-
-          <Heading>
-            <h1>SEMI_FINAL ROUND</h1>
-            <span>ประกาศผู้มีสิทธิ์เข้าสัมภาษณ์</span>
-          </Heading>
-
-          <div>
-            <FlatButton onClick={() => this.props.onClickFunc()}>
-              {this.props.searchPage ? 'ดูรายชื่อทั้งหมด' : '< กลับไปหน้าแรก'}
-            </FlatButton>
-          </div>
-        </Container>
-      </Padding>
-    )
-  }
-
+Header.propTypes = {
+  // true = search page | false = candidates page
+  searchPage: PropTypes.bool.isRequired,
+  // just like on click function
+  onClickFunc: PropTypes.func.isRequired,
 }
 
 export default Header
