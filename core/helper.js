@@ -36,3 +36,13 @@ export const checkCandidate = (name, major, candidate) => {
     return false
   }
 }
+
+// getCandidateByMajor: get candidates list by string
+export const getCandidateByMajor = (major, candidate) => {
+  const majorString = ['content', 'design', 'marketing', 'programming']
+  candidate = candidate.filter(x => x.major === majorString[major - 1])
+  candidate.sort((a, b) => {
+    return parseInt(a.interviewRef[2]+a.interviewRef[3]) - parseInt(b.interviewRef[2]+b.interviewRef[3])
+  })
+  return candidate
+}

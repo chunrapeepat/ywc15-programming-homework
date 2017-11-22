@@ -9,6 +9,7 @@ import App from '../components/App'
 import Loader from '../components/Loader'
 import Header from '../containers/Header'
 import Search from '../containers/Search'
+import Candidates from '../containers/Candidates'
 import Footer from '../components/Footer'
 
 class Index extends Component {
@@ -16,7 +17,8 @@ class Index extends Component {
   constructor() {
     super()
     this.state = {
-      loading: true
+      loading: true,
+      searchPage: true,
     }
   }
 
@@ -30,12 +32,20 @@ class Index extends Component {
     this.props.pushInterviewToStore(interview)
   }
 
+  togglePage() {
+    this.setState({ searchPage: !this.state.searchPage })
+  }
 
   render() {
     return (
       <Loader isLoading={this.state.loading}>
-        <Header />
-        <Search />
+        <Header searchPage={this.state.searchPage} onClickFunc={() => this.togglePage()}/>
+        { this.state.searchPage &&
+          <Search />
+        }
+        { !this.state.searchPage &&
+          <Candidates />
+        }
         <Footer />
       </Loader>
     )

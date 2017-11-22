@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import styled from 'styled-components'
 import fetch from 'isomorphic-fetch'
+import Link from 'next/link'
 
 import {
   Padding,
@@ -39,13 +40,6 @@ const Heading = styled.div`
 
 class Header extends Component {
 
-  constructor() {
-    super()
-    this.state = {
-
-    }
-  }
-
   render() {
     return (
       <Padding>
@@ -58,7 +52,9 @@ class Header extends Component {
           </Heading>
 
           <div>
-            <FlatButton>ดูรายชื่อทั้งหมด</FlatButton>
+            <FlatButton onClick={() => this.props.onClickFunc()}>
+              {this.props.searchPage ? 'ดูรายชื่อทั้งหมด' : '< กลับไปหน้าแรก'}
+            </FlatButton>
           </div>
         </Container>
       </Padding>

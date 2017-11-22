@@ -23,5 +23,6 @@ export default () => (
   <Container>
     Develop & Design by <a href="https://facebook.com/chun42" target="_blank">Chun Rapeepat</a>,
     View source on <a href="https://github.com/chunza2542/ywc15-programming-homework" target="_blank">Github</a>
+    <br/><br/>
   </Container>
 )
