@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
 import styled from 'styled-components'
 import {connect} from 'react-redux'
+
+import {Padding} from '../core/styled'
+import {getCandidateByMajor} from '../core/helper'
 import CandidateList from '../components/CandidateList'
 
-import {getCandidateByMajor} from '../core/helper'
-import {Padding} from '../core/styled'
-
+// Container component || sidebar tab and content
 const Container = styled.div`
   display: flex;
 
@@ -43,10 +44,12 @@ class Candidates extends Component {
     }
   }
 
+  // Update page state when page change
   updatePage(page) {
     this.setState({ page })
   }
 
+  // Check page is active (return boolean)
   isPageActive(page) {
     return page === this.state.page
   }
@@ -100,6 +103,7 @@ class Candidates extends Component {
   }
 }
 
+// map candidates data from redux store to props
 function mapStateToProps(state) {
   return {
     candidate: state

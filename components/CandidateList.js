@@ -1,6 +1,6 @@
 import React from 'react'
-import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
 const Heading = styled.h1`
   color: white;
@@ -38,10 +38,11 @@ const Container = styled.div`
   }
 `
 
-export default (props) => (
+const CandidateList = props => (
   <div>
     <Heading>{props.heading}</Heading>
     <Container>
+
       <div>
         {props.candidates.map((x, i) => {
           if (i <= Math.floor(props.candidates.length / 2 - 1)) {
@@ -56,6 +57,7 @@ export default (props) => (
           }
         })}
       </div>
+
       <div>
         {props.candidates.map((x, i) => {
           if (i >= Math.floor(props.candidates.length / 2)) {
@@ -70,6 +72,16 @@ export default (props) => (
           }
         })}
       </div>
+
     </Container>
   </div>
 )
+
+CandidateList.propTypes = {
+  // candidates data in array(obj)
+  candidates: PropTypes.object.isRequired,
+  // title heading
+  heading: PropTypes.string.isRequired,
+}
+
+export default CandidateList

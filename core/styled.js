@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 
+// props: widthonly => make padding only top and bottom
 export const Padding = styled.div`
   padding: ${props => (props.widthonly) ? '0' : '50px'} 50px;
 `

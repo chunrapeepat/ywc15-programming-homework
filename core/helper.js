@@ -30,6 +30,7 @@ export const checkCandidate = (name, major, candidate) => {
   if (candidate.length === 0) {
     return false
   } else {
+    // check candidate major is match
     if (candidate[0].major === majorString[major - 1]) {
       return true
     }
@@ -41,6 +42,7 @@ export const checkCandidate = (name, major, candidate) => {
 export const getCandidateByMajor = (major, candidate) => {
   const majorString = ['content', 'design', 'marketing', 'programming']
   candidate = candidate.filter(x => x.major === majorString[major - 1])
+  // sort candidates list by interview reference
   candidate.sort((a, b) => {
     return parseInt(a.interviewRef[2]+a.interviewRef[3]) - parseInt(b.interviewRef[2]+b.interviewRef[3])
   })
