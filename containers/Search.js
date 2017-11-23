@@ -16,6 +16,10 @@ const FormContainer = styled.form`
   display: block;
   width: 1000px;
   margin: auto auto;
+
+  @media (max-width: 950px) {
+    width: 100%;
+  }
 `
 
 // SearchForm Component

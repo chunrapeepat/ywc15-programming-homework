@@ -11,6 +11,7 @@ export default class MyDocument extends Document {
       <html>
         <Head>
           <title>YWC15 Programming Homework | Interview Candidates</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="theme-color" content="#000" />
           <meta name="viewport" content="width=device-width" />
           {styleTags}
