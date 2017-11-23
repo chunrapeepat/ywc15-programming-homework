@@ -17,6 +17,14 @@ const FormContainer = styled.form`
   width: 1000px;
   margin: auto auto;
 
+  ${this} > div {
+    padding: 50px;
+
+    @media (max-width: 500px) {
+      padding: 40px 15px;
+    }
+  }
+
   @media (max-width: 950px) {
     width: 100%;
   }
@@ -62,7 +70,7 @@ class SearchForm extends Component {
     return (
       <FormContainer
         onSubmit={this.handleSubmit.bind(this)}>
-        <Padding>
+        <div>
           <InputLabel>ชื่อ นามสกุล</InputLabel>
           <Input
             disabled={this.state.disabled}
@@ -84,7 +92,7 @@ class SearchForm extends Component {
             type="submit">
             {(this.state.disabled) ? 'กำลังค้นหา...' : 'ค้นหาจากรายชื่อ'}
           </FlatButton>
-        </Padding>
+        </div>
       </FormContainer>
     )
   }

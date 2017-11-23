@@ -6,7 +6,12 @@ const Container = styled.div`
   margin: 20px 0;
   text-align: center;
 
-  ${this} > a {
+  ${this} > div {
+    padding: 0 20px;
+    line-height: 30px;
+  }
+
+  ${this} > div > a {
     color: #ccc;
     font-weight: bold;
     text-decoration: none;
@@ -17,12 +22,18 @@ const Container = styled.div`
       border-bottom: 2px solid white;
     }
   }
+
+  @media (max-width: 950px) {
+    margin: 0;
+  }
 `
 
 export default () => (
   <Container>
-    Develop & Design by <a href="https://facebook.com/chun42" target="_blank">Chun Rapeepat</a>,
-    View source on <a href="https://github.com/chunza2542/ywc15-programming-homework" target="_blank">Github</a>
-    <br/><br/>
+    <div>
+      Develop & Design by <a href="https://facebook.com/chun42" target="_blank">Chun Rapeepat</a>,
+      View source on <a href="https://github.com/chunza2542/ywc15-programming-homework" target="_blank">Github</a>
+      <br/><br/>
+    </div>
   </Container>
 )
