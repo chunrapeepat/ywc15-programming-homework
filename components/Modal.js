@@ -22,7 +22,6 @@ const Container = styled.div`
   top: 50vh;
   left: 50%;
   width: 600px;
-  height: 450px;
   position: fixed;
   z-index: 99999999;
   border-radius: 5px;
@@ -30,9 +29,16 @@ const Container = styled.div`
   transition-timing-function: ease-in-out;
   background: ${props => (props.win) ? '#EFFFED' : '#FFEDED'};
 
+  @media (max-width: 600px) {
+    width: 90vw;
+  }
+
+  ${this} > ${Padding} > img {
+    width: 80%;
+  }
+
   ${this} > div:nth-child(1) {
     width: 100%;
-    height: 200px;
     text-align: center;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -52,6 +58,10 @@ const Content = styled.div`
     font-size: 18px;
     line-height: 30px;
     font-family: sans-serif;
+  }
+
+  &:last-child {
+    padding-bottom: 30px;
   }
 `
 class Modal extends Component {
@@ -137,7 +147,7 @@ class Modal extends Component {
             transition: modalTransition,
           }}>
           <Padding>
-            <img height="160px" src="/static/logo.png" alt="YWC15"/>
+            <img src="/static/logo.png" alt="YWC15"/>
           </Padding>
           <Padding>
             { this.state.win &&
