@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import {connect} from 'react-redux'
 
 import Modal from './Modal'
 import {
@@ -190,13 +189,8 @@ RandomBar.propTypes = {
   name: PropTypes.string.isRequired,
   // Main major [programming, content, design, marketingk]
   major: PropTypes.number.isRequired,
+  // candidates data arr(obj)
+  candidate: PropTypes.array.isRequired,
 }
 
-// Get data from redux store
-function mapStateToProps(state) {
-  return {
-    candidate: state
-  }
-}
-
-export default connect(mapStateToProps, null)(RandomBar)
+export default RandomBar

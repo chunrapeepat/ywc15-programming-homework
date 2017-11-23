@@ -9,7 +9,7 @@ import App from '../components/App'
 import Loader from '../components/Loader'
 import Header from '../containers/Header'
 import Search from '../containers/Search'
-import Footer from '../components/Footer'
+import Footer from '../containers/Footer'
 import Candidates from '../containers/Candidates'
 
 class Index extends Component {
