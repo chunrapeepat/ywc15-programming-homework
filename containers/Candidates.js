@@ -13,10 +13,19 @@ const Container = styled.div`
   ${this} > div:nth-child(1) {
     width: 250px;
     margin-right: 30px;
+
+    @media (max-width: 950px) {
+      width: 100%;
+      margin-bottom: 50px;
+    }
   }
 
   ${this} > div:nth-child(2) {
     flex: 1;
+  }
+
+  @media (max-width: 950px) {
+    display: block;
   }
 `
 

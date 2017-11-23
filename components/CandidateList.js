@@ -7,6 +7,10 @@ const Heading = styled.h1`
   margin: 0;
   font-size: 40px;
   font-family: supermarket;
+
+  @media (max-width: 950px) {
+    text-align: center;
+  }
 `
 
 const Divider = styled.div`
@@ -15,6 +19,12 @@ const Divider = styled.div`
   background: #A8F7F0;
   width: 10px;
   height: 10px;
+
+  @media (max-width: 1250px) {
+    width: 0;
+    height: 0;
+    display: block;
+  }
 `
 
 const List = styled.div`
@@ -35,19 +45,28 @@ const Container = styled.div`
 
   ${this} > div {
     flex: 1;
+    line-height: 30px;
+
+    @media (max-width: 950px) {
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 950px) {
+    display: block;
   }
 `
 
 const CandidateList = props => (
   <div>
-    <Heading>{props.heading}</Heading>
+    <Heading>{props.heading.toUpperCase()}</Heading>
     <Container>
 
       <div>
         {props.candidates.map((x, i) => {
           if (i <= Math.floor(props.candidates.length / 2 - 1)) {
             return (
-              <div>
+              <div key={i}>
                 <List>
                   ชื่อ-นามสกุล: <b>{x.firstName} {x.lastName}</b> <Divider/>
                   รหัสเข้าสัมภาษณ์: <b>{x.interviewRef}</b>
@@ -62,7 +81,7 @@ const CandidateList = props => (
         {props.candidates.map((x, i) => {
           if (i >= Math.floor(props.candidates.length / 2)) {
             return (
-              <div>
+              <div key={i}>
                 <List>
                   ชื่อ-นามสกุล: <b>{x.firstName} {x.lastName}</b> <Divider/>
                   รหัสเข้าสัมภาษณ์: <b>{x.interviewRef}</b>
