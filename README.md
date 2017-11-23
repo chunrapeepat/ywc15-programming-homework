@@ -5,6 +5,9 @@
 - มีระบบค้นหาชื่อผ่านกล่อง Search
 - ความสามารถหรือ Feature พิเศษอื่น ๆ
 
+> Try it yourself
+> https://ywc15-programming-homework.firebaseapp.com
+
 ## Build Setup
 clone this repository and run these command
 ```bash
@@ -18,4 +21,4 @@ npm run dev
 npm run export
 ```
 
-Made with <3 by Chun Rapeepat
+Made with ❤️ by Chun Rapeepat
