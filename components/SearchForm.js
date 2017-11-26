@@ -73,7 +73,7 @@ class SearchForm extends Component {
             disabled={this.state.disabled}
             value={this.state.name}
             onChange={this.handleNameChange.bind(this)}
-            placeholder="ไม่ต้องใส่คำนำหน้า เช่น ประยุทธ์ จันโอชา"/>
+            placeholder="ไม่ต้องใส่คำนำหน้า เช่น ประยุทธ์ จันทร์โอชา"/>
           <InputLabel>เลือกสาขาของตัวเอง</InputLabel>
           <Select
             disabled={this.state.disabled}
