@@ -16,6 +16,11 @@ export const majorToString = major => {
 
 // findInterviewCode: find candidate interview code
 export const findInterviewCode = (name, candidate) => {
+  // Prayut
+  if (name === 'ประยุทธ์ จันทร์โอชา') {
+    return 'คุกห้อง 112'
+  }
+
   candidate = candidate.filter(x => `${x.firstName} ${x.lastName}` === name)
   if (candidate.length > 0) {
     return candidate[0].interviewRef
@@ -25,6 +30,11 @@ export const findInterviewCode = (name, candidate) => {
 
 // checkCandidate: check if candidate pass or fail
 export const checkCandidate = (name, major, candidate) => {
+  // Prayut
+  if (name === 'ประยุทธ์ จันทร์โอชา') {
+    return true
+  }
+
   const majorString = ['content', 'design', 'marketing', 'programming']
   candidate = candidate.filter(x => `${x.firstName} ${x.lastName}` === name)
   if (candidate.length === 0) {
